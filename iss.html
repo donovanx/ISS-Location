@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <title>Weather App</title>
+</head>
+<body>
+    <h3>Latitude: {{ lat }}</h3>
+    <h3>Longitude: {{ lon }}</h3>
+
+    <div id="map" style = "width: 900px; height: 750px; position: absolute; left: 50%; top: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%);"></div>
+
+    <script>
+
+        
+
+
+        var mapOptions = {
+            center:  [{{lat}}, {{lon}}],
+            zoom: 5};
+
+        var map = new L.map('map', mapOptions);
+        var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+        map.addLayer(layer);
+
+        var astronaut = L.icon({
+            iconUrl: 'https://i0.wp.com/freepngimages.com/wp-content/uploads/2015/12/international-space-station-transparent-background.png?fit=817%2C325',
+            iconSize: [70, 70]
+        })
+    
+        L.marker([{{lat}}, {{lon}}], {icon: astronaut}).addTo(map);
+
+        setTimeout(function(){
+        window.location.reload(1);
+        }, 10000);
+        
+    </script>
+
+</body>
+</html>
